@@ -40,7 +40,7 @@ import java.io.File;
  */
 public class SerenityPlugin extends Plugin {
 
-    public static final String REPORT_FOLDER = "serenityReports";
+    public static final String REPORT_FOLDER = "thucydidesReport";
 
     private static final String SERENITY_ICON_URL = "img/serenity48.jpeg";
 
@@ -51,8 +51,7 @@ public class SerenityPlugin extends Plugin {
      */
     public static File getBuildReportFolder(AbstractBuild<?, ?> build) {
         assert build != null;
-        File reportFolder = new File(build.getRootDir(), REPORT_FOLDER);
-        return reportFolder;
+        return new File(build.getRootDir(), REPORT_FOLDER);
     }
 
     /**

@@ -66,7 +66,7 @@ public class SerenityBuildAction implements Action {
      */
     @Override
     public String getDisplayName() {
-        return "Serenity Test Report";
+        return "Serenity BDD Test Report";
     }
 
     /**
@@ -74,7 +74,7 @@ public class SerenityBuildAction implements Action {
      */
     @Override
     public String getUrlName() {
-        return "serenityReport";
+        return "thucydidesReport";
     }
 
     /**
@@ -92,7 +92,7 @@ public class SerenityBuildAction implements Action {
             throws IOException, ServletException, InterruptedException {
 
         AbstractProject<?, ?> project = build.getProject();
-        String title = project.getDisplayName() + " Serenity Result Summary";
+        String title = project.getDisplayName() + " Serenity BDD Result Summary";
         FilePath systemDirectory = new FilePath(SerenityPlugin.getBuildReportFolder(build));
         return new DirectoryBrowserSupport(this, systemDirectory, title, null, false);
     }

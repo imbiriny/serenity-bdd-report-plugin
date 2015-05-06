@@ -59,7 +59,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
 public class SerenityArchiver extends Recorder {
 
     private String reportPath;
-
+    private boolean skipIfBuildFail;
 
     /**
      * Constructs a SerenityArchiver with a parameter from the project configuration page.
@@ -70,8 +70,9 @@ public class SerenityArchiver extends Recorder {
      *        annotation.
      */
     @DataBoundConstructor
-    public SerenityArchiver(String reportPath) {
+    public SerenityArchiver(String reportPath, boolean skipIfBuildFail) {
         this.reportPath = reportPath;
+        this.skipIfBuildFail = skipIfBuildFail;
     }
 
     /**
@@ -108,8 +109,16 @@ public class SerenityArchiver extends Recorder {
         // Fail the build if the report directory does not exist. This is most probably caused
         // by incorrect input on the configuration page.
         FilePath report = build.getWorkspace().child(reportPath);
+
+        // Early exit when the build has failed. There's little chance of finding any reports
+        // in this case anyway.
+        if (!skipIfBuildFail && build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
+            logger.println("[Serenity BDD] not collecting results due to build failure");
+            return true;
+        }
+
         if (!report.exists()) {
-            logger.println("[Serenity] report directory " + report + " does not exist");
+            logger.println("[Serenity BDD] report directory " + report + " does not exist");
             build.setResult(Result.FAILURE);
             return true;
         }

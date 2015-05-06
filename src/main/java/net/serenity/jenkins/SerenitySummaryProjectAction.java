@@ -60,7 +60,7 @@ public class SerenitySummaryProjectAction implements ProminentProjectAction, Sta
      * TODO i18n
      */
     public String getDisplayName() {
-        return "Serenity Test Report";
+        return "Serenity BDD Test Report";
     }
 
     /**

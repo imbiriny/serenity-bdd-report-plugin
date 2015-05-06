@@ -57,7 +57,7 @@ public class SerenityArchiverDescriptor extends BuildStepDescriptor<Publisher> {
      * TODO i18n
      */
     public String getDisplayName() {
-        return "Publish Serenity Test Reports";
+        return "Publish Serenity BDD Test Reports";
     }
 
     /**

@@ -27,5 +27,5 @@ THE SOFTWARE.
   Since we don't really have anything dynamic here, let's just use static HTML. 
 -->
 <div>
-  Plugin for running <a href="http://thucydides.wakaleo.com">Thucydides</a> web tests.
+  Plugin for running <a href="http://www.thucydides.info/">Serenity BDD</a> web tests.
 </div>

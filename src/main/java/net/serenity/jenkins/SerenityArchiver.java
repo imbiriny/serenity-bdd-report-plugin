@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2011, Harald Wellmann
+ * Copyright (c) 2011, Alexey Dybov
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,20 +25,15 @@ package net.serenity.jenkins;
 
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.model.Action;
-import hudson.model.BuildListener;
-import hudson.model.Result;
-import hudson.model.AbstractBuild;
-import hudson.model.AbstractProject;
+import hudson.model.*;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Recorder;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Collection;
-
-import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
  * A Publisher plugin for Jenkins which publishes the Serenity test reports from the latest build
@@ -59,7 +54,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
 public class SerenityArchiver extends Recorder {
 
     private String reportPath;
-    private boolean skipIfBuildFail;
+    private boolean skipIfBuildFailed;
 
     /**
      * Constructs a SerenityArchiver with a parameter from the project configuration page.
@@ -70,18 +65,22 @@ public class SerenityArchiver extends Recorder {
      *        annotation.
      */
     @DataBoundConstructor
-    public SerenityArchiver(String reportPath, boolean skipIfBuildFail) {
+    public SerenityArchiver(String reportPath, boolean skipIfBuildFailed) {
         this.reportPath = reportPath;
-        this.skipIfBuildFail = skipIfBuildFail;
+        this.skipIfBuildFailed = skipIfBuildFailed;
     }
+
 
     /**
      * This getter is required by config.jelly.
-     * 
      * @return report path defined by user.
      */
     public String getReportPath() {
         return reportPath;
+    }
+
+    public boolean getSkipIfBuildFailed() {
+        return skipIfBuildFailed;
     }
 
     /**
@@ -112,7 +111,7 @@ public class SerenityArchiver extends Recorder {
 
         // Early exit when the build has failed. There's little chance of finding any reports
         // in this case anyway.
-        if (!skipIfBuildFail && build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
+        if (!skipIfBuildFailed && build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
             logger.println("[Serenity BDD] not collecting results due to build failure");
             return true;
         }

@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
-<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
   <!--
     This jelly script is used for per-project configuration.
 
@@ -32,11 +32,11 @@ THE SOFTWARE.
     Creates a text field that shows the value of the "reportPath" property.
     When submitted, it will be passed to the corresponding constructor parameter.
   -->
-  <f:entry title="Report Path" field="reportPath">
-    <f:textbox name="reportPath" value="${instance.reportPath}"
-     checkUrl="'descriptorByName/SerenityArchiver/check?value='+encodeURIComponent(this.value)"/>
-  </f:entry>
-  <f:entry title="Skip if build failed" field="skipIfBuildFailed">
-    <f:checkbox name="skipIfBuildFailed" checked="${instance.skipIfBuildFailed}"/>
-  </f:entry>
+    <f:entry title="Report Path" field="reportPath">
+        <f:textbox name="reportPath" value="${it.reportPath}"
+                   checkUrl="'descriptorByName/SerenityArchiver/check?value='+encodeURIComponent(this.value)"/>
+    </f:entry>
+    <f:entry title="" field="skipIfBuildFailed">
+        <f:checkbox title="Skip if build failed" name="skipIfBuildFailed" field="skipIfBuildFailed" value="${it.skipIfBuildFailed}"/>
+    </f:entry>
 </j:jelly>

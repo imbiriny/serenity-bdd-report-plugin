@@ -36,7 +36,7 @@ THE SOFTWARE.
         <f:textbox name="reportPath" value="${it.reportPath}"
                    checkUrl="'descriptorByName/SerenityArchiver/check?value='+encodeURIComponent(this.value)"/>
     </f:entry>
-    <f:entry title="" field="skipIfBuildFailed">
-        <f:checkbox title="Skip if build failed" name="skipIfBuildFailed" field="skipIfBuildFailed" value="${it.skipIfBuildFailed}"/>
+    <f:entry title="" field="publishTestReportIfBuildFailed">
+        <f:checkbox title="Publish test report when build failed" name="publishTestReportIfBuildFailed" field="publishTestReportIfBuildFailed" value="${it.publishTestReportIfBuildFailed}"/>
     </f:entry>
 </j:jelly>

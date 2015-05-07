@@ -11,7 +11,7 @@
   <groupId>net.serenity-bdd.jenkins</groupId>
   <artifactId>serenity-bdd</artifactId>
   <name>Serenity Jenkins Plugin</name>
-  <version>0.3.23</version>
+  <version>0.3.24</version>
   <packaging>hpi</packaging>
 
   <scm>

@@ -54,7 +54,7 @@ import java.util.Collection;
 public class SerenityArchiver extends Recorder {
 
     private String reportPath;
-    private boolean skipIfBuildFailed;
+    private boolean publishTestReportIfBuildFailed;
 
     /**
      * Constructs a SerenityArchiver with a parameter from the project configuration page.
@@ -65,9 +65,9 @@ public class SerenityArchiver extends Recorder {
      *        annotation.
      */
     @DataBoundConstructor
-    public SerenityArchiver(String reportPath, boolean skipIfBuildFailed) {
+    public SerenityArchiver(String reportPath, boolean publishTestReportIfBuildFailed) {
         this.reportPath = reportPath;
-        this.skipIfBuildFailed = skipIfBuildFailed;
+        this.publishTestReportIfBuildFailed = publishTestReportIfBuildFailed;
     }
 
 
@@ -79,8 +79,8 @@ public class SerenityArchiver extends Recorder {
         return reportPath;
     }
 
-    public boolean getSkipIfBuildFailed() {
-        return skipIfBuildFailed;
+    public boolean getPublishTestReportIfBuildFailed() {
+        return publishTestReportIfBuildFailed;
     }
 
     /**
@@ -111,7 +111,7 @@ public class SerenityArchiver extends Recorder {
 
         // Early exit when the build has failed. There's little chance of finding any reports
         // in this case anyway.
-        if (!skipIfBuildFailed && build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
+        if (!publishTestReportIfBuildFailed && build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
             logger.println("[Serenity BDD] not collecting results due to build failure");
             return true;
         }
